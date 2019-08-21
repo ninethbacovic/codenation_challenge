@@ -1,2 +1,2 @@
-web: gunicorn desafio2019.wsgi
+web: gunicorn pets.wsgi
 release: python manage.py migrate
