@@ -1,20 +1,19 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Users(models.Model):
-  username = models.CharField(max_length=20)
-  email = models.CharField(max_length=40)
-  name = models.CharField(max_length=100)
+class Profile(models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
   created = models.DateTimeField(auto_now=True)
   modified = models.DateTimeField(auto_now_add=True)
 
-  def _str_(self):
+  def __str__(self):
     return "{} - {}".format(self.username, self.email)
   class Meta:
-        ordering = ['pk']
+    ordering = ['pk']
 
-class Animals(models.Model):
+class Animal(models.Model):
 
-  contact = models.ForeignKey(Users, on_delete = models.CASCADE)
+  contact = models.ForeignKey(Profile, on_delete = models.CASCADE)
 
   name = models.CharField(max_length = 255,null = False,blank = False)
   description = models.TextField(blank = True)

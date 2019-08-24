@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Users, Animals
+from .models import Profile, Animal
 
-admin.site.register(Users)
-admin.site.register(Animals)
+admin.site.register(Profile)
+admin.site.register(Animal)
