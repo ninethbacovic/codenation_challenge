@@ -13,9 +13,10 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 from rest_framework.response import Response
+from . import models
 
 class ProfileListView(ListCreateAPIView):
-  queryset = Profile.objects.all()
+  queryset = models.Profile.objects.all()
   serializer_class = ProfileSerializer
 
 class AnimalListView(ListCreateAPIView):
@@ -32,7 +33,7 @@ class ProfileDetailView(RetrieveUpdateDestroyAPIView):
   queryset = Profile.objects.all()
   serializer_class = ProfileDetailSerializer
 
-@csrf_exempt
+""" @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
 def login(request):
@@ -48,4 +49,4 @@ def login(request):
       status=HTTP_404_NOT_FOUND)
   token, _ = Token.objects.get_or_create(user=user)
   return Response({'token': token.key},
-    status=HTTP_200_OK)
+    status=HTTP_200_OK) """
