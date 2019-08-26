@@ -63,3 +63,25 @@ class AnimalDetailSerializer(ModelSerializer):
           'created',
           'modified',
           ]
+
+class AnimalUpdateDetailSerializer(ModelSerializer):
+    class Meta:
+        model = Animal
+        id = serializers.IntegerField(read_only=True)
+        fields = ['contact',
+         'id',
+         'name',
+        'description',
+         'image',
+          'age',
+          'color',
+          'gender',
+          'specie',
+          'size',
+          'category',
+          'location',
+          'city',
+          'state',
+          'created',
+          'modified',
+          ]

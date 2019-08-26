@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import ProfileCreationForm, ProfileChangeForm
-#admin.site.register(Profile)
+
 admin.site.register(Animal)
 class ProfileAdmin(UserAdmin):
     add_form = ProfileCreationForm
