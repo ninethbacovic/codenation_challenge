@@ -12,16 +12,22 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_200_OK
 )
+from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
 from rest_framework.response import Response
+from . import models
+
+class ReadOnly(BasePermission):
+  def has_permission(self, request, view):
+    return request.method in SAFE_METHODS
 
 class ProfileListView(ListCreateAPIView):
-  queryset = Profile.objects.all()
+  queryset = models.Profile.objects.all()
   serializer_class = ProfileSerializer
 
 class AnimalListView(ListCreateAPIView):
   queryset = Animal.objects.all()
   serializer_class = AnimalSerializer
-
+  
 # Used for Animal --> read-write-delete endpoints to represent a single model instance
 class AnimalDetailView(RetrieveUpdateDestroyAPIView):
   queryset = Animal.objects.all()
@@ -29,8 +35,16 @@ class AnimalDetailView(RetrieveUpdateDestroyAPIView):
 
 # Used for Profile --> read-write-delete endpoints to represent a single model instance
 class ProfileDetailView(RetrieveUpdateDestroyAPIView):
+  permission_classes = [IsAuthenticated, ]
   queryset = Profile.objects.all()
   serializer_class = ProfileDetailSerializer
+
+
+#def get(self, request, format=None):
+ #       content = {
+  #          'status': 'request was permitted'
+   #     }
+    #    return Response(content)
 
 @csrf_exempt
 @api_view(["POST"])
@@ -48,4 +62,4 @@ def login(request):
       status=HTTP_404_NOT_FOUND)
   token, _ = Token.objects.get_or_create(user=user)
   return Response({'token': token.key},
-    status=HTTP_200_OK)
+    status=HTTP_200_OK) 

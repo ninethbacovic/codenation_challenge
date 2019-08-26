@@ -1,19 +1,21 @@
 from rest_framework.serializers import ModelSerializer
 from app_pets.models import Profile, Animal
 from rest_framework import serializers
+from . import models
 
 class ProfileSerializer(ModelSerializer):
   class Meta:
-    model = Profile
+    model = models.Profile
     id = serializers.IntegerField(read_only=True)
-    fields = ('id', 'username', 'password', 'email', 'name', 'created', 'modified')
+    fields = ('id', 'username', 'email', 'name', 'created', 'modified')
+    #fields = ('id', 'username', 'password', 'email', 'name', 'created', 'modified')
     
 
 class ProfileDetailSerializer(ModelSerializer):
   class Meta:
     model = Profile
     id = serializers.IntegerField(read_only=True)
-    fields = ('id','username', 'email', 'name', 'created', 'modified')
+    fields = ('id','username', 'email', 'name','created', 'modified')
 
 
 class AnimalSerializer(ModelSerializer):
