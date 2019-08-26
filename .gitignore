@@ -1,2 +1,5 @@
 .env/
 .DS_Store
+*.pyc
+app_pets/__pycache__/*
+pets/__pycache__/*

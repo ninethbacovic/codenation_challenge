@@ -1,26 +1,28 @@
 from rest_framework.serializers import ModelSerializer
-from app_pets.models import Users, Animals
+from app_pets.models import Profile, Animal
 from rest_framework import serializers
+from . import models
 
-class UsersSerializer(ModelSerializer):
+class ProfileSerializer(ModelSerializer):
   class Meta:
-    model = Users
+    model = models.Profile
     id = serializers.IntegerField(read_only=True)
     fields = ('id', 'username', 'email', 'name', 'created', 'modified')
+    #fields = ('id', 'username', 'password', 'email', 'name', 'created', 'modified')
     
 
-class UsersDetailSerializer(ModelSerializer):
+class ProfileDetailSerializer(ModelSerializer):
   class Meta:
-    model = Users
+    model = Profile
     id = serializers.IntegerField(read_only=True)
-    fields = ('id','username', 'email', 'name', 'created', 'modified')
+    fields = ('id','username', 'email', 'name','created', 'modified')
 
 
-class AnimalsSerializer(ModelSerializer):
+class AnimalSerializer(ModelSerializer):
     class Meta:
         ordering = ['created']
         id = serializers.IntegerField(read_only=True)
-        model = Animals
+        model = Animal
         fields = [
         'contact',
          'id',
@@ -40,9 +42,9 @@ class AnimalsSerializer(ModelSerializer):
           'modified',
           ]
 
-class AnimalsDetailSerializer(ModelSerializer):
+class AnimalDetailSerializer(ModelSerializer):
     class Meta:
-        model = Animals
+        model = Animal
         id = serializers.IntegerField(read_only=True)
         fields = ['contact',
          'id',
