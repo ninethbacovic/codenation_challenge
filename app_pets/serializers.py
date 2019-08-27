@@ -1,24 +1,22 @@
 from rest_framework.serializers import ModelSerializer
 from app_pets.models import Profile, Animal
 from rest_framework import serializers
-from django.contrib.auth.models import User
-
-class UserSerializer(ModelSerializer):
-  class Meta:
-    model = User
-    fields = ('username', 'email', 'first_name', 'password')
+from . import models
 
 class ProfileSerializer(ModelSerializer):
   user = UserSerializer()
   class Meta:
-    model = Profile
-    fields = ('id', 'user', 'created', 'modified')
+    model = models.Profile
+    id = serializers.IntegerField(read_only=True)
+    fields = ('id', 'username', 'email', 'name', 'created', 'modified')
+    #fields = ('id', 'username', 'password', 'email', 'name', 'created', 'modified')
     
 
 class ProfileDetailSerializer(ModelSerializer):
   class Meta:
     model = Profile
-    fields = ('id','username', 'email', 'name', 'created', 'modified')
+    id = serializers.IntegerField(read_only=True)
+    fields = ('id','username', 'email', 'name','created', 'modified')
 
 class AnimalSerializer(ModelSerializer):
   class Meta:

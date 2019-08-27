@@ -1,15 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django import forms
 
-class Profile(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
+class Profile(AbstractUser):
+  name = models.CharField(blank=False, max_length=255)
   created = models.DateTimeField(auto_now=True)
   modified = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
-    return "{} - {}".format(self.user.username, self.email)
-  class Meta:
-    ordering = ['pk']
+    return self.email
+  #user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
+  #created = models.DateTimeField(auto_now=True)
+  #modified = models.DateTimeField(auto_now_add=True)
+
+ # def __str__(self):
+ #   return "{} - {}".format(self.username, self.email)
+ # class Meta:
+ #   ordering = ['pk']
 
 class Animal(models.Model):
 
