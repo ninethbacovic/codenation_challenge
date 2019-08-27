@@ -7,7 +7,7 @@ class Profile(models.Model):
   modified = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
-    return "{} - {}".format(self.username, self.email)
+    return "{} - {}".format(self.user.username, self.email)
   class Meta:
     ordering = ['pk']
 

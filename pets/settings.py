@@ -86,9 +86,8 @@ WSGI_APPLICATION = 'pets.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'pet_escale'),
-        'USER': os.environ.get('DB_USER', 'squa6'),
-        'PASSWORD': os.environ.get('DB_PASS', 'escalemuitomesmo')
+        'NAME': os.environ.get('DB_NAME', 'pets_escale'),
+        'USER': os.environ.get('DB_USER', 'squad6'),
     }
 }
 
