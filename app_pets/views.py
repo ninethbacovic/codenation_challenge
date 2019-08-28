@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from app_pets.serializers import ProfileSerializer, AnimalSerializer, AnimalDetailSerializer, ProfileDetailSerializer
+from app_pets.serializers import ProfileSerializer, ProfileDetailSerializer, AnimalSerializer, AnimalDetailSerializer, AnimalUpdateDetailSerializer
 from app_pets.models import Profile, Animal
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -15,29 +15,38 @@ from rest_framework.status import (
 from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
 from rest_framework.response import Response
 from . import models
+from rest_framework import permissions
 
-class ReadOnly(BasePermission):
-  def has_permission(self, request, view):
-    return request.method in SAFE_METHODS
-
-class ProfileListView(ListCreateAPIView):
+# Profile List --> read-only endpoints of all profiles. Everyone can see it.
+class ProfileListView(ListAPIView): 
+  permission_classes = [permissions.AllowAny]
   queryset = models.Profile.objects.all()
   serializer_class = ProfileSerializer
 
-class AnimalListView(ListCreateAPIView):
+# Profile detail -->just for who has login to read-write-delete endpoints to represent a single model instance.
+class ProfileDetailView(RetrieveUpdateDestroyAPIView):
+  permission_classes = [permissions.IsAuthenticated]
+  queryset = Profile.objects.all()
+  serializer_class = ProfileDetailSerializer
+
+# Animal list --> used for read-only endpoints. Everyone can see it.
+class AnimalListView(ListAPIView):
+  permission_classes = [permissions.AllowAny]
   queryset = Animal.objects.all()
   serializer_class = AnimalSerializer
-  
-# Used for Animal --> read-write-delete endpoints to represent a single model instance
-class AnimalDetailView(RetrieveUpdateDestroyAPIView):
+
+# Animal detail --> used for read-only endpoints. Everyone can see it.
+class AnimalDetailView(ListAPIView):
+  permission_classes = [permissions.AllowAny]
   queryset = Animal.objects.all()
   serializer_class = AnimalDetailSerializer
 
-# Used for Profile --> read-write-delete endpoints to represent a single model instance
-class ProfileDetailView(RetrieveUpdateDestroyAPIView):
-  permission_classes = [IsAuthenticated, ]
-  queryset = Profile.objects.all()
-  serializer_class = ProfileDetailSerializer
+# Animal Update Detail - just for who has login to read-write-delete endpoints to represent a single model instance
+class AnimalUpdateDetailView(RetrieveUpdateDestroyAPIView):
+  permission_classes = [permissions.IsAuthenticated]
+  queryset = Animal.objects.all()
+  serializer_class = AnimalDetailSerializer
+
 
 
 #def get(self, request, format=None):
