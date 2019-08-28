@@ -9,14 +9,13 @@ class ProfileSerializer(ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     fields = ('id', 'username', 'email', 'name', 'created', 'modified')
     #fields = ('id', 'username', 'password', 'email', 'name', 'created', 'modified')
-    
 
 class ProfileDetailSerializer(ModelSerializer):
   class Meta:
     model = Profile
     id = serializers.IntegerField(read_only=True)
-    fields = ('id','username', 'email', 'name','created', 'modified')
-
+    fields = ('id','username', 'email', 'name',  'created', 'modified')
+#'created',
 
 class AnimalSerializer(ModelSerializer):
     class Meta:
