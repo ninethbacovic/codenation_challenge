@@ -23,11 +23,11 @@ class AnimalSerializer(ModelSerializer):
         id = serializers.IntegerField(read_only=True)
         model = Animal
         fields = [
-        'contact',
-         'id',
-         'name',
-        'description',
-         'image',
+          'contact',
+          'id',
+          'name',
+          'description',
+          'image',
           'age',
           'color',
           'gender',
