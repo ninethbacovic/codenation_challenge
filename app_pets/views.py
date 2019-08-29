@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
 from app_pets.serializers import ProfileSerializer, ProfileDetailSerializer, AnimalSerializer, AnimalDetailSerializer, AnimalUpdateDetailSerializer, AnimalNewDetailSerializer
 from app_pets.models import Profile, Animal
 from django.contrib.auth import authenticate
@@ -36,7 +37,7 @@ class AnimalListView(ListAPIView):
   serializer_class = AnimalSerializer
 
 # Animal detail --> used for read-only endpoints. Everyone can see it.
-class AnimalDetailView(ListAPIView):
+class AnimalDetailView(RetrieveAPIView):
   permission_classes = [permissions.AllowAny]
   queryset = Animal.objects.all()
   serializer_class = AnimalDetailSerializer
