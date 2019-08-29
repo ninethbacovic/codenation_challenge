@@ -113,10 +113,12 @@ WSGI_APPLICATION = 'pets.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', 'pet_escale'),
-        'USER': os.environ.get('DB_USER', 'squa6'),
-        'PASSWORD': os.environ.get('DB_PASS', 'escalemuitomesmo')
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), 
+       #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': os.environ.get('DB_NAME', 'pet_escale'),
+        #'USER': os.environ.get('DB_USER', 'squa6'),
+        #'PASSWORD': os.environ.get('DB_PASS', 'escalemuitomesmo')
     }
 }
 
@@ -167,6 +169,7 @@ django_heroku.settings(locals())
 # Media path for animals
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'pets/media')
+LOGIN_REDIRECT_URL = 'users/<int:pk>'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -179,10 +182,10 @@ REST_FRAMEWORK = {
 
 
 # Storage on S3 settings are stored as os.environs to keep settings.py clean
-if not DEBUG:
+'''if not DEBUG:
    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-   STATIC_URL = S3_URL
+   STATIC_URL = S3_URL'''
