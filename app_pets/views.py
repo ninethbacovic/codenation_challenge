@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from app_pets.serializers import ProfileSerializer, ProfileDetailSerializer, AnimalSerializer, AnimalDetailSerializer, AnimalUpdateDetailSerializer
+from app_pets.serializers import ProfileSerializer, ProfileDetailSerializer, AnimalSerializer, AnimalDetailSerializer, AnimalUpdateDetailSerializer, AnimalNewDetailSerializer
 from app_pets.models import Profile, Animal
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -45,9 +45,13 @@ class AnimalDetailView(ListAPIView):
 class AnimalUpdateDetailView(RetrieveUpdateDestroyAPIView):
   permission_classes = [permissions.IsAuthenticated]
   queryset = Animal.objects.all()
-  serializer_class = AnimalDetailSerializer
+  serializer_class = AnimalUpdateDetailSerializer
 
-
+# Create a new animal - just for who has login to create endpoints to represent a single model instance
+class AnimalNewDetailView(CreateAPIView):
+  permission_classes = [permissions.IsAuthenticated]
+  queryset = Animal.objects.all()
+  serializer_class = AnimalNewDetailSerializer
 
 #def get(self, request, format=None):
  #       content = {

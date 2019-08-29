@@ -6,6 +6,7 @@ class Profile(AbstractUser):
   name = models.CharField(blank=False, max_length=255)
   created = models.DateTimeField(auto_now=True)
   modified = models.DateTimeField(auto_now_add=True)
+  image = models.ImageField(upload_to='imgs/profile/', blank=True)
 
   def __str__(self):
     return self.email
