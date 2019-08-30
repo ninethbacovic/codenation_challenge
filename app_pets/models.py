@@ -10,19 +10,10 @@ class Profile(AbstractUser):
 
   def __str__(self):
     return self.email
-  #user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
-  #created = models.DateTimeField(auto_now=True)
-  #modified = models.DateTimeField(auto_now_add=True)
-
- # def __str__(self):
- #   return "{} - {}".format(self.username, self.email)
- # class Meta:
- #   ordering = ['pk']
 
 class Animal(models.Model):
 
   contact = models.ForeignKey(Profile, on_delete = models.CASCADE)
-
   name = models.CharField(max_length = 255,null = False,blank = False)
   description = models.TextField(blank = True)
   image = models.ImageField(upload_to='imgs/animals/', blank=True)
@@ -52,6 +43,9 @@ class Animal(models.Model):
   state = models.CharField(max_length = 255,)
   created = models.DateTimeField(auto_now=True)
   modified = models.DateTimeField(auto_now_add=True)
+
   class Meta:
     ordering = ['created']
 
+  def __str__(self):
+    return self.name
