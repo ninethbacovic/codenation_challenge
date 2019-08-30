@@ -73,6 +73,7 @@ AUTHENTICATION_BACKENDS = (
 AUTH_USER_MODEL = 'app_pets.Profile'
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -168,7 +169,7 @@ django_heroku.settings(locals())
 
 # Media path for animals
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'pets/media')
+MEDIA_ROOT = '/home/nineth2019/codenation_challenge/media'
 LOGIN_REDIRECT_URL = 'users/<int:pk>'
 
 REST_FRAMEWORK = {
